@@ -1,0 +1,46 @@
+/* Emilie Rajka
+ * Unit 4 Lab 2
+ */
+import java.util.*;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+class UglyNumbers
+{
+	public static Collection<Integer> listUgly (int n)
+	{
+		TreeSet<Integer> thing = new TreeSet<Integer>();
+		SortedSet<Integer> temp = new TreeSet<Integer>();
+		
+		thing.add(1);
+		thing.add(2);
+		thing.add(3);
+		thing.add(5);
+		//generates first N ugly numbers
+		int count = 2;
+		int position = 0;
+		
+		
+    	while (position < n)
+		{
+			
+			thing.add(count * 2);
+			thing.add(count * 3);
+			thing.add(count * 5);
+			
+			position++;
+			
+			temp = thing.tailSet(count+1);
+			count = temp.first();		
+		}
+	
+		return thing;
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.print(listUgly(100));
+		
+	}	
+}

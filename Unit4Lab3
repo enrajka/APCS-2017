@@ -1,0 +1,211 @@
+/* Emilie Rajka
+ * Unit 4 Lab 3
+ */
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedHashSet;
+
+class Tester {
+    public static void main(String[] args) {
+
+        String[] things = {"eggs", "bacon", "hats", "dogs", "cats", "eggs"};
+        String[] thinger = {"dogs", "watermelons", "volleyballs", "milk"};
+        List<String> data = new ArrayList<String>();
+        List<String> other = new ArrayList<String>();
+        Object target = "eggs";
+		
+		System.out.println("Data set one is: ");
+        for (String x : things) {
+            data.add(x);
+            
+            System.out.print(x + " ");
+        }
+        
+        System.out.println("\n");
+        System.out.println("Data set two is: ");
+        for (String y : thinger) {
+            other.add(y);
+            System.out.print(y + " ");
+
+        }
+       
+        System.out.println("\n\nThe first data set has been made into the following array: ");
+        Object[] testing = ListOps.toArray(data);
+        for(int i = 0; i < testing.length; i++)
+        {
+        	System.out.print(testing[i] + " ");
+        }
+       
+        List testing2 = ListOps.clone(other);
+        System.out.println("\n\nThe second data set has been duplicated into the following list: ");
+        for(Object m: testing2)
+        {
+        	System.out.print(m + " ");
+        }
+       
+        boolean testing3 = ListOps.contains(data, "hats");
+        System.out.println("\n\nData set 1 contains hats: " + testing3);
+       
+        List testing4 = ListOps.intersect(data, other);
+        System.out.println("\n\nThe data that is shared between the two sets are: ");
+        for(Object n: testing4)
+        {
+        	System.out.print(n + " ");
+        }
+        
+        List testing5 = ListOps.union(data, other);
+        System.out.println("\n\nThe data that is not shared between the two sets is: ");
+        for(Object q: testing5)
+        {
+        	System.out.print(q + " ");
+        }
+        
+        List testing6 = ListOps.skip(data, 2);
+        System.out.println("\n\nThe first data set skipping every other is shown below: ");
+        for(Object g: testing6)
+        {
+        	System.out.print(g + " ");
+        }
+        
+        String testing7 = ListOps.toString(other);
+        System.out.println("\n\nThe second data list wass put into the following string: ");
+    	System.out.println(testing7);
+    	
+    	System.out.println("\n\nThe first data set without any duplicates is shown below: ");
+    	ListOps.shrink(data);
+    }
+}
+
+class ListOps
+{
+	public static Object[] toArray(List data)
+ 	{
+ 		Object[] obj = new Object[data.size()];
+ 		//makes data into an array
+ 		
+ 		int count = 0;
+ 		
+ 		for(Object stuff: data)
+ 		{
+ 			obj[count] = stuff; //puts stuff into array from List data
+ 			count++;
+ 		}
+ 		
+ 		return obj;
+ 	}
+ 	
+ /*	 public static<E> E[] twoArray(List data2)
+     {
+         E[] typ = new E[data2.size()];
+         int count = 0;
+
+         for(E addition: data2)
+         {
+             typ[count] = addition; //puts the generic type of data from the List into an array
+             count++;
+         }
+
+         return typ;
+         //same as before except using generics
+     }
+*/
+ 	
+ 	public static List clone(List data)
+    {
+       	List duplicate = new ArrayList();
+        duplicate = data;
+        return duplicate;
+    }
+
+ 	public static boolean contains(List data, Object target)
+     {
+     	boolean result = false;
+         for(Object obj: data)
+         {
+             if(obj == target)
+             {
+                 result = true;
+             }
+         }
+         return result;
+     }
+
+
+     public static List intersect(List data, List other)
+     {
+         List newList = new ArrayList();
+
+         for(Object part: other)
+         {
+             for(Object section: data)
+             {
+                 if(part == section)
+                 {
+                     newList.add(part);
+                 }
+             }
+         }
+         return newList;
+
+         //return a new list of all the overlapping data
+     }
+
+     public static List union(List data, List other)
+     {
+         List newList2 = new ArrayList();
+         newList2.addAll(data);
+		 newList2.addAll(other);
+		 
+         for(Object part: other)
+         {
+             for(Object section: data)
+             {
+                 if(part == section)
+                 {
+                     newList2.remove(part);  
+                 }
+             }
+         }
+        // ListOps.shrink(newList2); // remove duplicate "eggs"
+
+         return newList2;
+     }
+     
+     public static List skip(List data, int n)
+     {
+         ArrayList skippingData = new ArrayList();
+         Object first = data.get(0);
+         skippingData.add(first);
+
+         for(int i = n; i < data.size(); i += n)
+         {
+             Object next = data.get(i); //is this how you access the element at i in the List
+             skippingData.add(next);
+         }
+         //makes new list that holds every nth value from orig.
+         return skippingData;
+     }
+
+ 	 public static String toString(List data)
+     {
+         String fullString = "";
+
+         for(Object piece: data)
+         {
+             fullString += (piece + ", ");
+         }
+
+         return fullString;
+     }
+     
+     public static void shrink(List data)
+     {
+        List<Object> removed1 = new ArrayList<>(new LinkedHashSet<Object>(data));
+		for(Object w: removed1)
+		{
+			System.out.print(w + " ");
+		}
+     }
+
+}

@@ -1,0 +1,42 @@
+/* Emilie Rajka
+ * Unit 4 Lab 1
+ */
+
+class Pair <F,S>
+{ 
+   	 private F f; 
+   	 private S s;
+   	 
+   	 Pair(F f, S s)
+   	 {
+   	 	this.f = f;
+   	 	this.s = s;
+   	 }
+   	 
+	 
+	 public static <F,S> void printMe(F x, S y)
+	 {
+	 	System.out.print("\n" + x + " " + y); // both
+	 	System.out.println();
+	 	System.out.print("\n" + x); //just first
+	 	System.out.println();
+	 }
+	 	 
+}
+
+
+class PairTester
+{
+	public static void main(String[] args)
+	 {
+	 	Pair<String, String> spair = new Pair<String,String>("dogs","cats");
+	 	Pair<String, Integer> mpair = new Pair<String,Integer>("nine",9);
+	 	Pair<Double, String> lpair = new Pair<Double, String>(15.5,"fifteen and a half");
+	 	
+	 	spair.printMe("dogs","cats");
+	 	mpair.printMe("nine",9);
+	 	lpair.printMe(15.5, "fifteen and a half");
+	 	
+	 }
+	 
+}

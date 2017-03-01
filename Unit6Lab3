@@ -1,0 +1,146 @@
+
+/**
+ * Created by emilie on 2/21/2017.
+ */
+    //insertion sort
+    //takes in list and divides it into two parts..unsorted part is moved to sorted part
+    // takes first element if next element is bigger put right after it
+    //if the next number is smaller put it in first slot in list
+    //
+    //if less than element in sorted part put it in the previous spot and recall the method until no numbers are smaller
+    //need variable for index
+
+
+import java.util.*;
+
+
+public class LittleLeague {
+
+    public static void main(String[] args) {
+
+    	SortTime little = new SortTime();
+
+        Player a = new Player("Arya", "Smells");
+        Player b = new Player("Alex",  "Smellsworse");
+        Player c = new Player("Jason", "McScallopZ");
+        Player d = new Player("Katie",  "ThinksIt’sOkToBeLate");
+		Player e = new Player("Jeremy", "Meh");
+		Player f = new Player("Al", "Yourbase");
+		Player g = new Player("Joe", "Arggggggg");
+
+        Team falcons = new Team("Falcons");
+        falcons.addPlayer(a);
+        falcons.addPlayer(b);
+		falcons.addPlayer(c);
+		falcons.addPlayer(d);
+
+        Team pirates = new Team("Pirates");
+        pirates.addPlayer(e);
+        pirates.addPlayer(f);
+		pirates.addPlayer(g);
+
+        little.addTeam(falcons);
+        little.addTeam(pirates);
+
+        System.out.print(little.toString());
+    }
+}
+
+//create an arraylist of teams
+//sort them in alpha order
+//print it all
+class SortTime{
+
+	ArrayList<Team> teams = new ArrayList<>(); // make arraylist of the teams so i can compare to find which comes first
+
+	public void addTeam(Team t){ //this makes an array list of the two teams
+		teams.add(t);
+	}
+
+	public ArrayList<Team> insertSortTeams(){
+
+		for(int i = 1; i < teams.size(); i++){ //team at spot 1
+		     for (int j = i ; j > 0; j--){//team in spot 0
+		         if(teams.get(j).getName().compareTo(teams.get(j - 1).getName()) < 0){ //if the name at last spot is smaller than the one in the spot before
+		             Team temp = teams.get(j);
+		             teams.set(j, teams.get(j - 1));
+		             teams.set(j - 1, temp);
+		         }
+		     }
+		 }
+		 return teams;
+	}
+	public String toString(){
+		insertSortTeams();
+		String listPlayers = " ";
+		for(int x = 0; x < teams.size(); x++){
+	        	listPlayers += teams.get(x).toString() + "\n";
+        }
+        return listPlayers;
+	}
+}
+
+//accept a team name
+//create an array of players for the team
+//sort the players into alpha order by last name
+class Team{
+	private ArrayList<Player> players = new ArrayList<Player>();
+	private String team = " ";
+
+	Team(String t){
+		team = t;
+	}
+
+	public String getName(){
+		return team;
+	}
+
+	public void addPlayer(Player p){
+		players.add(p);
+	}
+
+	public ArrayList<Player> insertSortPlayers(){
+
+		for(int i = 1; i < players.size(); i++){
+			Player temp = players.get(i);
+		     for (int j = i ; j > 0; j--){
+		         if(temp.compareTo(players.get(j - 1)) < 0){
+		             players.set(j, players.get(j - 1));
+		             players.set(j - 1, temp);
+		         }
+		     }
+		 }
+		 return players;
+	}
+
+	public String toString(){
+		insertSortPlayers();
+
+		String s = team + ": \n" ;
+		for(int x = 0; x < players.size(); x++){
+        	s += "\t" + players.get(x).toString() + "\n";
+        }
+        return s;
+	}
+
+}
+//create a player
+class Player implements Comparable<Player>{
+	private String firstname = " ";
+	private String lastname = " ";
+
+	Player(String f, String l){
+		firstname = f;
+		lastname = l;
+	}
+	public String getLastName(){
+		return lastname;
+	}
+	public int compareTo(Player p){
+		return lastname.compareTo(p.getLastName());
+	}
+
+	public String toString(){
+		return firstname + " " + lastname;
+	}
+}

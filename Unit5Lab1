@@ -1,0 +1,40 @@
+/**
+ * Created by emilie on 1/23/2017.
+ * Basic Recursion introduction
+ */
+
+class Tester {
+    public static void main(String[] args) {
+
+        System.out.println("1 factorial: " + factorial(1));
+        System.out.println("3 factorial: " + factorial(3));
+        System.out.println("25 factorial: " + factorial(25));
+        System.out.println("30 factorial: " + factorial(30));
+
+        System.out.println("\nGCD of 12 and 8 is: " + gcd(12, 8));
+        System.out.println("GCD of 35 and 12 is: " + gcd(35, 12));
+        System.out.println("GCD of 21 and 7 is: " + gcd(21, 7));
+        System.out.println("GCD of 33 and 22 is: " + gcd(33, 22));
+    }
+
+    public static int factorial(int value)
+    {
+        if(value > 0)
+        {
+            value *= value;
+            factorial(value-1);
+        }
+        return value;
+    }
+    public static int gcd(int a, int b)
+    {
+        if(b > 0)
+        {
+            int x = b;
+            b = a%b;
+            return gcd(x, b);
+        }
+        return a;
+
+    }
+}

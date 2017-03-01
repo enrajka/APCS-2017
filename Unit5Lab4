@@ -1,0 +1,64 @@
+/**
+ * Created by emilie on 1/28/2017.
+ */
+public class ArrayMax
+{
+    public static void main(String[] args)
+    {
+        /* make a int[] for first one
+        then make a <Integer>[] and <String>[] for generic method
+         */
+
+        int[] theThing = {1,2,3,4,5,6,7,8,9};
+        Integer[] gen1 = {2,43,55,12,467,62};
+        String[] gen2 = {"a","A","z","w","t"};
+        int currentMax = theThing[0];
+        int index = 0;
+
+        System.out.print("An int array: ");
+        for(int i = 0; i < theThing.length; i++)
+        {
+            System.out.print(theThing[i] + " ");
+        }
+        System.out.println("\nThe largest value in the array above was: " + recursiveMax(theThing,index,currentMax));
+
+        System.out.print("\n\nAn Integer array: ");
+        for(int i = 0; i < gen1.length; i++)
+        {
+            System.out.print(gen1[i] + " ");
+        }
+        System.out.println("\nThe largest value in the array above was: " + recursiveGenericMax(gen1,index,gen1[0]));
+
+        System.out.print("\n\nA String array: ");
+        for(int i = 0; i < gen2.length; i++)
+        {
+            System.out.print(gen2[i] + " ");
+        }
+        System.out.println("\nThe largest value in the array above was: " + recursiveGenericMax(gen2,index,gen2[0]));
+    }
+
+     private static int recursiveMax(int[] a, int start, int max)
+    {
+        if(start == a.length)
+            return max;
+        if(a[start] > max)
+        {
+            max = a[start];
+        }
+
+        return recursiveMax(a, (start + 1), max);
+    }
+
+    private static <T extends Comparable<T>> T recursiveGenericMax(T[] a, int index, T max)
+    {
+        if(index == a.length)
+            return max;
+        if(a[index].compareTo(max) > 0)
+        {
+            max = a[index];
+        }
+
+        return recursiveGenericMax(a, (index+1), max);
+    }
+
+}

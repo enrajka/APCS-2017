@@ -1,0 +1,91 @@
+/**
+ * Created by emilie on 1/27/2017.
+ * This was done using an 8x8 board
+ * would need to be adjusted for making the user be able to decided board size
+ */
+
+class Tester
+{
+    final int NumQueens = 8;
+
+    void printSolution(int board[][])
+    {
+        for (int i = 0; i < NumQueens; i++)
+        {
+            for (int j = 0; j < NumQueens; j++)
+                System.out.print(" " + board[i][j]
+                        + " ");
+            System.out.println();
+        }
+    }
+
+    boolean safeSpots(int board[][], int row, int col)
+    {
+        int i, j;
+
+        for (i = 0; i < col; i++)
+            if (board[row][i] == 1)
+                return false;
+
+        for (i=row, j=col; i>=0 && j>=0; i--, j--) {
+            if (board[i][j] == 1){
+                return false;}
+        }
+
+        for (i=row, j=col; j>=0 && i<NumQueens; i++, j--)
+            if (board[i][j] == 1)
+                return false;
+
+        return true;
+    }
+
+    boolean queens(int board[][], int col)
+    {
+        if (col >= NumQueens)
+            return true;
+
+        for (int i = 0; i < NumQueens; i++)
+        {
+            if (safeSpots(board, i, col))
+            {
+                board[i][col] = 1;
+
+                if (queens(board, col + 1) == true)
+                    return true;
+
+                board[i][col] = 0;
+            }
+        }
+
+        return false;
+    }
+
+    boolean figureItOut()
+    {
+        int[][] board = {{0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0}};
+
+
+
+        if (queens(board, 0) == false)
+        {
+            System.out.print("Solution does not exist");
+            return false;
+        }
+
+        printSolution(board);
+        return true;
+    }
+
+    public static void main(String args[])
+    {
+        Tester queenie = new Tester();
+        queenie.figureItOut();
+    }
+}

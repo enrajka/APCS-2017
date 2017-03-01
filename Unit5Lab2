@@ -1,0 +1,44 @@
+/**
+ * Created by emilie on 1/26/2017.
+ * Estimating Square Roots using recursion
+ */
+class SquareRoot
+{
+    public static void main(String[] args)
+    {
+        System.out.println("The estimate of the square root of 3 is: " + calculate(3, 1)); //finding the square root of 3
+        System.out.println("The actual square root of 3 is: " + Math.sqrt(3));
+        System.out.println("\nThe estimate of the square root of 15 is: " + calculate(15, 1)); //finding the square root of 3
+        System.out.println("The actual square root of 15 is: " + Math.sqrt(15));
+        System.out.println("\nThe estimate of the square root of 33 is: " + calculate(33, 1)); //finding the square root of 3
+        System.out.println("The actual square root of 33 is: " + Math.sqrt(33));
+
+
+    }
+
+    public static double calculate(double number, double guess)
+    {
+        if(closeEnough((number / guess), guess))
+        {
+            return guess;
+        }
+        else
+        {
+            return calculate(number, betterGuess(guess, number));
+        }
+
+    }
+
+    public static double betterGuess(double a, double b)
+    {
+        double part = (b/a);
+        return ((a + part) / 2);
+    }
+
+    public static boolean closeEnough(double a, double b)
+    {
+        return (Math.abs(a-b) < .00001);
+    }
+}
+
+

@@ -1,0 +1,90 @@
+/**
+ * Created by emilie on 2/6/2017.
+ * Makes an array of 100 intergers, then uses sequential search to find occurences
+ */
+public class Tester
+{
+    public static void main(String[] args) {
+        Numbers thing = new Numbers();
+
+        System.out.println("First 4 is at spot " + thing.findFirst(4));
+        
+        System.out.println("Last 7 in the array is: " + thing.findLast(7));
+        
+        System.out.print("The number 3 appears at spots: ");
+        thing.findAll(3);
+        
+        System.out.println("\n18 appears " + thing.count(18) + " times");
+        
+        System.out.println(thing.greater(13) + " are greater than 13");
+    }
+}
+
+/**
+ * Created by emilie on 2/5/2017.
+ */
+public class Numbers
+{
+    int[] array = new int[100];
+
+    Numbers()
+    {
+        for(int i = 0; i < array.length; i++)
+            array[i] = (int) (Math.random()*20 + 1);
+    }
+
+    public  int findFirst(int value) // returns the first occurrence location
+    {
+        for(int m = 0; m < array.length; m++){
+            if(array[m] == value){
+                return m;}}
+
+                return -1;
+
+    }
+    public int findLast(int value)  // returns last occurrence location
+    {
+        int last = array[array.length - 1];
+        for(int f = last; f > 0; f-- )
+        {
+            if(array[f] == value)
+            {
+                return f;
+            }
+        }
+        return 2;
+    }
+    public void findAll(int value)  // prints a list of all locations
+    {
+        int location = 0;
+        for(int l = 0; l < array.length; l++)
+        {
+            if(array[l] == value)
+            {
+                System.out.print(l + " ");
+            }
+        }
+
+    }
+    public int count(int value)     // returns the number of times value appears in the array
+    {
+        int count = 0;
+        for(int i = 0; i < array.length; i++){
+            if(array[i] == value){
+                count++;}}
+
+        return count;
+    }
+    public int greater(int value)   // returns how many items are greater than value in the array
+    {
+        int howMany = 0;
+        for(int j = 0; j < array.length; j++){
+            if(array[j] > value){
+                howMany++;}}
+
+        return howMany;
+    }
+}
+
+
+

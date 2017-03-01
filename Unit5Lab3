@@ -1,0 +1,32 @@
+/**
+ * Created by emilie on 1/27/2017.
+ */
+ 
+public class FibonacciNums
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Fibonacci Number of 9 is: " + fib(9)) ;
+        System.out.println("Fibonacci Number of 14 is: " + fib(14));
+        System.out.println("Fibonacci Number of 6 is: " + fib(6));
+        System.out.println("Fibonacci Number of 11 is: " + fib(11));
+    }
+
+    public static int fib(int n)
+    {
+        int fibb = 0;
+
+        if(n == 0)
+            return 0;
+        else if(n == 1)
+            return 1;
+        else
+        {
+            fib(n-1);
+            fibb = (fib(n-1) + fib(n -2));
+
+            return fibb;
+        }
+
+    }
+}

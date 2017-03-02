@@ -1,0 +1,106 @@
+
+import javafx.application.Application;
+import javafx.scene.control.Button;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Test extends Application{
+
+    Stage window;
+    Scene scene1, scene2, scene3, scene4, scene5, scene6;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        //the popup window is called the stage
+        //content inside the window is the scene
+        
+        window = primaryStage;
+        Label label1 = new Label("Oh no! You're trapped in your office bathroom. \nWhat do you do?");
+        Label label2 = new Label("You made the right turn, now you have two options: \nthe door in front of you or the lamp in the corner?");
+        Label label3 = new Label("You Lose :(");
+        Label label4 = new Label("Great! Under the lampshade you see a knife and a \nmatch. Which will you pick up?");
+        Label label5 = new Label("Oh no, the lights went out. Good thing you picked the match. \nYou shine the light around and see a window and an air vent. \nWhat next?");
+        Label label6 = new Label("Congrats! You've escaped!");
+
+
+        Button button1 = new Button("Go left");
+        Button button2 = new Button("Go right");
+        //clicking first button brings you to next step
+        button1.setOnAction(e -> window.setScene(scene2));
+
+        //clicking second button brings you to the Loser screen
+        button2.setOnAction(e -> window.setScene(scene3));
+
+        VBox layout1 = new VBox(20);
+        layout1.getChildren().addAll(label1, button1, button2);
+        layout1.setStyle("-fx-background-color: #FF5733");
+        scene1 = new Scene(layout1, 300, 300);
+
+        Button button3 = new Button("Door");
+        //if you go to the door you lose so bring to Loser screen
+        button3.setOnAction(e -> window.setScene(scene3));
+
+        //clicking button 4 brings you to next step
+        Button button4 = new Button("Lamp");
+        button4.setOnAction(e -> window.setScene(scene4));
+
+        VBox layout2 = new VBox(20);
+        layout2.getChildren().addAll(label2, button3, button4);
+        layout2.setStyle("-fx-background-color: #D2B4DE");
+        scene2 = new Scene(layout2, 300, 250);
+
+        Button button5 = new Button("Try Again");
+        button5.setOnAction(e -> window.setScene(scene1));
+
+        VBox layout3 = new VBox(20);
+        layout3.getChildren().addAll(label3, button5);
+        layout3.setStyle("-fx-background-color: #B2BABB");
+        scene3 = new Scene(layout3, 300, 250);
+
+        Button button6 = new Button("Match");
+        button6.setOnAction(e -> window.setScene(scene5)); //clicking this brings to final scene
+
+        Button button7 = new Button("Knife");
+        button7.setOnAction(e -> window.setScene(scene3)); //sends to loser screen
+
+        VBox layout4 = new VBox(20);
+        layout4.getChildren().addAll(label4, button6, button7);
+        layout4.setStyle("-fx-background-color: #76D7C4");
+        scene4 = new Scene(layout4, 300, 250);
+
+        Button button8 = new Button("Try to break the window");
+        button8.setOnAction(e -> window.setScene(scene3)); //sends to loser screen
+
+        Button button9 = new Button("Crawl through the air vent");
+        button9.setOnAction(e -> window.setScene(scene6)); //moves to winner screen
+
+        VBox layout5 = new VBox(20);
+        layout5.getChildren().addAll(label5, button8, button9);
+        layout5.setStyle("-fx-background-color: #F8C471");
+        scene5 = new Scene(layout5, 300, 250);
+
+        Button button10 = new Button("Head back to the main screen");
+        button10.setOnAction(e -> window.setScene(scene1));
+
+
+        VBox layout6 = new VBox(20);
+        layout6.getChildren().addAll(label6, button10);
+        layout6.setStyle("-fx-background-color: #F9E79F");
+        scene6 = new Scene(layout6, 300, 250);
+
+
+        window.setScene(scene1);
+        window.setTitle("Room Escape");
+        window.show();
+        
+
+    }
+
+
+}

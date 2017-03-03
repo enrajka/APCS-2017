@@ -1,0 +1,165 @@
+import java.util.ArrayList;
+
+/**
+ * Created by emilie on 3/1/2017.
+ * Using merge sort to arrange cities in alphabetical order
+ */
+
+public class Tester {
+
+    public static void main(String[] args) {
+        Cities a = new Cities("flemington", "nj", 300000);
+        Cities b = new Cities("austin", "tx", 250000);
+        Cities c = new Cities("madison", "wi", 500000);
+        Cities d = new Cities("ztown", "fl", 234000);
+        Cities e = new Cities("los angeles", "ca", 400000);
+
+        ArrayList<Cities> allCities = new ArrayList<>();
+        allCities.add(a);
+        allCities.add(b);
+        allCities.add(c);
+        allCities.add(d);
+        allCities.add(e);
+
+        MergeTime mergeTime = new MergeTime(allCities);
+
+        System.out.print("the unsorted array\n");
+        mergeTime.printSortedArray();
+
+        mergeTime.sortArray();
+
+        ArrayList<Cities> newSort = mergeTime.getSortedArray();
+
+        System.out.print("\n\n\nthe sorted array\n");
+
+        mergeTime.printSortedArray();
+
+}}
+
+class Cities implements Comparable {
+
+        private String name;
+        private String state;
+        private int pop;
+
+        public Cities(String name, String state, int pop) {
+            this.name = name;
+            this.state = state;
+            this.pop = pop;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        public int getPop() {
+            return pop;
+        }
+
+        public void setPop(int pop) {
+            this.pop = pop;
+        }
+
+        public int compareTo2(Cities m) {
+            return state.compareTo(m.getState());
+        }
+
+        public int compareTo1(Cities o) {
+            return name.compareTo(o.getName());
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            return 0;
+        }
+
+        public static void toString1(ArrayList<Cities> allThem) {
+            for (int i = 0; i < allThem.size(); i++) {
+                System.out.println(allThem.get(i).getName() + " " + allThem.get(i).getState() + " " + allThem.get(i).getPop());
+            }
+        }
+
+
+    }
+
+class MergeTime {
+
+        private ArrayList<Cities> cities = new ArrayList<Cities>();
+
+        MergeTime(ArrayList<Cities> all) {
+            cities = all;
+        }
+
+        public ArrayList<Cities> getSortedArray() {
+            return cities;
+        }
+
+        public void printSortedArray() {
+            for (int i = 0; i < cities.size(); i++) {
+                System.out.println(cities.get(i).getName() + " " + cities.get(i).getState() + " " + cities.get(i).getPop());
+            }
+        }
+
+        public void sortArray() {
+            merge(0, cities.size() - 1);
+        }
+
+        public void merge(int start, int end) {
+            if (start < end && (end - start) >= 1) {
+                int center = (start + end) / 2;
+                merge(start, center);
+                merge(center + 1, end);
+
+                mergeSort(start, center, end);
+            }
+        }
+
+        public void mergeSort(int start, int center, int end) {
+            ArrayList<Cities> tmp = new ArrayList<Cities>();
+
+            int leftIndex = start;
+            int rightIndex = center + 1;
+
+            while (leftIndex <= center && rightIndex <= end) {
+                if (cities.get(leftIndex).compareTo1(cities.get(rightIndex)) <= 0) {
+                    tmp.add(cities.get(leftIndex));
+                    leftIndex++;
+                } else {
+                    tmp.add(cities.get(rightIndex));
+                    rightIndex++;
+                }
+
+            }
+
+            while (leftIndex <= center) {
+                tmp.add(cities.get(leftIndex));
+                leftIndex++;
+            }
+
+            while (rightIndex <= end) {
+                tmp.add(cities.get(rightIndex));
+                rightIndex++;
+            }
+
+            int i = 0;
+            int j = start;
+
+            while (i < tmp.size()) {
+                cities.set(j, tmp.get(i++));
+                j++;
+            }
+
+        }
+    }

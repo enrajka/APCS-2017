@@ -64,3 +64,70 @@ public class Tester
         line.toString1();
     }
 }
+
+public class Tray {
+
+    private ArrayList<String> food = new ArrayList<>();
+    private double cost;
+
+
+    public Tray(ArrayList<String> food, double cost)
+    {
+        this.food = food;
+        this.cost = cost;
+    }
+
+    public Tray()
+    {
+        food = null;
+        cost = 0;
+    }
+
+    public double getCost()
+    {
+        return cost;
+    }
+
+    public boolean addItem(String item, double amount)
+    {
+        while(food != null)
+        {
+            food.add(item);
+            cost += amount;
+            return true;
+        }
+      return false;
+    }
+
+    public String toString()
+    {
+        return food + "\ttotal cost: " + cost;
+    }
+}
+ublic class Line {
+    //holds a collection of trays
+    private ArrayList<Tray> arrayList = new ArrayList<>();
+
+
+    public Line(ArrayList<Tray> thing)
+    {
+        arrayList = thing;
+    }
+
+    public void checkOutFirst()
+    {
+        System.out.println("The first customer ordered: " + arrayList.get(0).toString());
+        arrayList.remove(0);
+        System.out.println("This customer was checked out.");
+
+    }
+
+    public void toString1()
+    {
+         System.out.print("The orders currently in line: \n");
+        for(Tray s: arrayList)
+        {
+            System.out.println(s.toString());
+        }
+    }
+}

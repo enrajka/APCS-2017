@@ -1,0 +1,188 @@
+/**
+ * Created by emilie on 3/6/2017.
+ * Method to create Linked List by hand
+ */
+public class Tester {
+    public static void main(String[] args) {
+        WaitingList list1 = new WaitingList();
+        WaitingList list2 = new WaitingList();
+
+        list1.add("A");
+        list1.add("B");
+        list1.add("C");
+
+        list2.add("D");
+        list2.add("E");
+
+        System.out.print(list1.toStr1ng());
+
+        System.out.print("\n\n" + list2.toStr1ng());
+
+        System.out.print("\nThe size of the first waiting list is: " + list1.size());
+
+        System.out.print("\nThe size of the second waiting list is: " + list2.size());
+
+        System.out.print("\nThe 2nd node is: ");
+        list1.getKthNode(2); //is not printing correct thing
+
+        list1.transferNodesFromEnd(list2, 2);
+        System.out.print("\n" + list1.toStr1ng());
+
+
+        // list1.transferNodesFromEnd(list2, 1);
+    }
+}
+
+public class WaitingList {
+
+    private int numNodes;
+    private Node front;
+
+    public WaitingList() {
+        front = new Node(null);
+        numNodes = 0;
+    }
+
+    public void add(Object data) {
+        Node tmp = new Node(data);
+        Node current = front;
+
+        while(current.getNext() != null) {
+            current = current.getNext();
+        }
+        current.setNext(tmp);
+        numNodes++;
+    }
+
+    public void add(Object data, int index) {
+        Node tmp = new Node(data);
+        Node current = front;
+
+        for(int i = 1;  i < index && current.getNext() != null; i++) {
+            current = current.getNext();
+        }
+        tmp.setNext(current.getNext());
+        current.setNext(tmp);
+        numNodes++;
+    }
+
+    public void getKthNode(int k)
+    {
+        Node tmp = front;
+        int indexD = 0;
+
+        while(indexD < k)
+        {
+            tmp = tmp.getNext();
+            indexD++;
+        }
+
+        System.out.print(tmp.getData());
+    }
+
+    public Object get(int index)
+    {
+        if (index <= 0)
+            return null;
+
+        Node current = front.getNext();
+        for (int i = 1; i < index; i++) {
+            if (current.getNext() == null)
+                return null;
+
+            current = current.getNext();
+        }
+        return current.getData();
+    }
+
+    public boolean remove(int index)
+    {
+        if(index < 1 || index > size())
+            return false;
+
+        Node current = front;
+        for(int i = 1; i < index; i++)
+        {
+            if(current.getNext() == null)
+                return false;
+
+            current = current.getNext();
+        }
+        current.setNext(current.getNext().getNext());
+        numNodes--;
+        return true;
+    }
+
+
+    public int size()
+    {
+        return numNodes;
+    }
+
+    public String toStr1ng(){
+        Node current = front.getNext();
+        String output = "";
+        while(current != null)
+        {
+            output += "[" + current.getData().toString() + "]";
+            current = current.getNext();
+        }
+        return output;
+    }
+
+    public void transferNodesFromEnd(WaitingList other, int num)
+    {
+        //want to remove last numnode in the "other" list
+        //puts these into the first list
+        //shares how many nodes in first list and how many in other
+        //int = 1 rn
+        int starting = other.size() - num;
+        other.remove(starting);
+        Node newCurrent = other.front.getNext();
+
+        while(newCurrent != null)
+        {
+            add(newCurrent.getData());
+            newCurrent = newCurrent.getNext();
+        }
+
+    }
+
+}
+public class Node {
+
+    //node class
+
+    Node next;
+    Object data;
+
+    public Node(Object qdata)
+    {
+        next = null;
+        data = qdata;
+    }
+
+    public Node(Object qdata, Node upNext)
+    {
+        next = upNext;
+        data = qdata;
+    }
+
+    public Node getNext() {
+        return next;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object newdata) {
+        data = newdata;
+    }
+
+    public void setNext(Node newnext) {
+        next =  newnext;
+    }
+
+}
+

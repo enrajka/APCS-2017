@@ -1,0 +1,66 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Created by emilie on 3/10/2017.
+ * Creating a lunch line with different trays 
+ */
+public class Tester
+{
+    public static void main(String[] args) {
+        ArrayList<Tray> linedUp = new ArrayList<>();
+        ArrayList<String> food = new ArrayList<String>();
+
+        food.add("hamburger");
+        food.add("apple");
+        food.add("lemonade");
+
+        ArrayList<String> food1 = new ArrayList<String>();
+        food1.add("hotdog");
+        food1.add("chips");
+        food1.add("water");
+
+        ArrayList<String> food2 = new ArrayList<String>();
+        food2.add("pasta");
+        food2.add("carrots");
+        food2.add("coke");
+
+        ArrayList<String> food3 = new ArrayList<String>();
+        food3.add("steak");
+        food3.add("apple");
+        food3.add("water");
+
+        ArrayList<String> food4 = new ArrayList<String>();
+        food4.add("spaghetti");
+        food4.add("eggs");
+        food4.add("cheesecake");
+        food4.add("juice box");
+
+        Tray a = new Tray(food, 11.75);
+        Tray b = new Tray(food1, 10.01);
+        Tray c = new Tray(food2, 8.32);
+        Tray d = new Tray(food3, 7.72);
+        Tray e = new Tray(food4, 13.12);
+
+        System.out.println("Original items and cost: " + a.toString());
+        a.addItem("cheetos", 1.75);
+        System.out.println("Pricing and list after buying a bag of cheetos: " + a.toString());
+
+//made all my trays that hold list of foods and total cost
+        linedUp.add(a);
+        linedUp.add(b);
+        linedUp.add(c);
+        linedUp.add(d);
+        linedUp.add(e);
+
+        Line line = new Line(linedUp);
+        System.out.println();
+        line.toString1();
+        line.checkOutFirst();
+        System.out.println();
+        line.toString1();
+    }
+}
